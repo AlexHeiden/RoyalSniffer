@@ -13,15 +13,16 @@ class KLAGENFURTJAM_API USmellController : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	USmellController();
+	
 	int color; // blue, yellow, red, green
 	int shape; // cylinder, cone, sphere, cube
 	int emission; // 0, 1, 2, 3
 	int food; // cheese, meat, veggies
 	bool poisonous;
-	static Rule* rules;
+	Rule* rules;
 
 	bool getPoisonous() const {
 		return poisonous;

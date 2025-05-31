@@ -136,7 +136,10 @@ public:
 
 protected:
 	// Called when the game starts
-	virtual void BeginPlay() override;
+	virtual void BeginPlay() override
+	{
+	    NextSetOfRules();
+	};
 
 public:	
 	// Called every frame
