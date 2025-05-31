@@ -24,7 +24,7 @@ class USmell : public UObject
 	int emission; // 0, 1, 2, 3
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	int food; // cheese, meat, veggies
+	int food; // cheese, meat, eggs
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool poisonous;
