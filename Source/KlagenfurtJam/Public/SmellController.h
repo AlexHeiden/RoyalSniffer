@@ -22,7 +22,7 @@ public:
 	int emission; // 0, 1, 2, 3
 	int food; // cheese, meat, veggies
 	bool poisonous;
-	Rule* rules;
+	FRule* rules;
 
 	bool getPoisonous() const {
 		return poisonous;

@@ -11,17 +11,20 @@
 #include "Components/ActorComponent.h"
 #include "Rules.generated.h"
 
-struct Rule {
+USTRUCT()
+struct FRule {
+    GENERATED_BODY()
+    
     public:
         int condTypes[2];
         int conditions[2];
 
-        Rule() {
+        FRule() {
             condTypes[0] = condTypes[1] = -1;
             conditions[0] = conditions[1] = -1;
         }
 
-        Rule(int inputCondTypes[2], int inputConditions[2]) {
+        FRule(int inputCondTypes[2], int inputConditions[2]) {
             for (int i = 0; i < 2; ++i) {
                 condTypes[i] = inputCondTypes[i];
                 conditions[i] = inputConditions[i];
@@ -85,7 +88,7 @@ public:
 	// Sets default values for this component's properties
 	URules();
 
-    Rule rules[5];
+    FRule rules[5];
     std::string arr[5];
 
     UFUNCTION(BlueprintCallable)
@@ -114,7 +117,7 @@ public:
                 int condTypeArr[2] = {type, -1};
                 int conditionArr[2] = {condition, -1};
 
-                rules[i] = Rule(condTypeArr, conditionArr);
+                rules[i] = FRule(condTypeArr, conditionArr);
             } else {
                 int typeOne = std::rand() % 3;
                 int conditionOne = std::rand() % 4;
@@ -129,17 +132,17 @@ public:
                 int condTypeArr[2] = {typeOne, typeTwo};
                 int conditionArr[2] = {conditionOne, conditionTwo};
 
-                rules[i] = Rule(condTypeArr, conditionArr);
+                rules[i] = FRule(condTypeArr, conditionArr);
             }
         }
     };
 
+    FRule* getRules() {
+        return rules;
+    }
 protected:
 	// Called when the game starts
-	virtual void BeginPlay() override
-	{
-	    NextSetOfRules();
-	};
+	virtual void BeginPlay() override;
 
 public:	
 	// Called every frame

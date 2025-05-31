@@ -18,7 +18,7 @@ URules::URules()
 void URules::BeginPlay()
 {
 	Super::BeginPlay();
-
+	NextSetOfRules();
 	// ...
 	
 }
