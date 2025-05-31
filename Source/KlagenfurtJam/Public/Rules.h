@@ -138,6 +138,7 @@ public:
         }
     };
 
+    UFUNCTION(BlueprintCallable)
     TArray<URule*> getRules() {
         return rules;
     }
