@@ -11,17 +11,7 @@
 #include "Components/ActorComponent.h"
 #include "Rules.generated.h"
 
-
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class KLAGENFURTJAM_API URules : public UActorComponent
-{
-	GENERATED_BODY()
-
-public:	
-	// Sets default values for this component's properties
-	URules();
-	
-	struct Rule {
+struct Rule {
     public:
         int condTypes[2];
         int conditions[2];
@@ -85,6 +75,15 @@ public:
             return result;
         }
 };
+
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+class KLAGENFURTJAM_API URules : public UActorComponent
+{
+	GENERATED_BODY()
+
+public:	
+	// Sets default values for this component's properties
+	URules();
 
     Rule rules[5];
     std::string arr[5];
