@@ -89,16 +89,20 @@ public:
     Rule rules[5];
     std::string arr[5];
 
-    std::string* getRulesString() {
+    UFUNCTION(BlueprintCallable)
+    FString getRulesString() {
+    FString result = "";
+        
         for (int i = 0; i < 5; i++) {
-            arr[i] = std::to_string(i+1);
-            arr[i] += ". ";
-            arr[i] += rules[i].toString();
+            result += FString(std::to_string(i+1).c_str());
+            result += ". ";
+            result += FString(rules[i].toString().c_str()) + '\n';
         }
 
-        return arr;
+        return result;
     }
-    
+
+    UFUNCTION(BlueprintCallable)
     void NextSetOfRules()
     {
         std::srand(std::time(nullptr));
