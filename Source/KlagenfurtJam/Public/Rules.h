@@ -11,21 +11,18 @@
 #include "Components/ActorComponent.h"
 #include "Rules.generated.h"
 
-USTRUCT()
-struct FRule {
+UCLASS(Blueprintable)
+class URule : public UObject{
     GENERATED_BODY()
     
     public:
         int condTypes[2];
         int conditions[2];
 
-        FRule() {
-            condTypes[0] = condTypes[1] = -1;
-            conditions[0] = conditions[1] = -1;
-        }
-
-        FRule(int inputCondTypes[2], int inputConditions[2]) {
-            for (int i = 0; i < 2; ++i) {
+        void Init(int inputCondTypes[2], int inputConditions[2])
+        {
+            for (int i = 0; i < 2; ++i)
+            {
                 condTypes[i] = inputCondTypes[i];
                 conditions[i] = inputConditions[i];
             }
@@ -88,7 +85,7 @@ public:
 	// Sets default values for this component's properties
 	URules();
 
-    FRule rules[5];
+    TArray<URule*> rules;
     std::string arr[5];
 
     UFUNCTION(BlueprintCallable)
@@ -98,7 +95,7 @@ public:
         for (int i = 0; i < 5; i++) {
             result += FString(std::to_string(i+1).c_str());
             result += ". ";
-            result += FString(rules[i].toString().c_str()) + '\n';
+            result += FString(rules[i]->toString().c_str()) + '\n';
         }
 
         return result;
@@ -117,7 +114,9 @@ public:
                 int condTypeArr[2] = {type, -1};
                 int conditionArr[2] = {condition, -1};
 
-                rules[i] = FRule(condTypeArr, conditionArr);
+                URule* newRule = NewObject<URule>(this);
+                newRule -> Init(condTypeArr, conditionArr);
+                rules.Add(newRule);
             } else {
                 int typeOne = std::rand() % 3;
                 int conditionOne = std::rand() % 4;
@@ -132,14 +131,17 @@ public:
                 int condTypeArr[2] = {typeOne, typeTwo};
                 int conditionArr[2] = {conditionOne, conditionTwo};
 
-                rules[i] = FRule(condTypeArr, conditionArr);
+                URule* newRule = NewObject<URule>(this);
+                newRule -> Init(condTypeArr, conditionArr);
+                rules.Add(newRule);
             }
         }
     };
 
-    FRule* getRules() {
+    TArray<URule*> getRules() {
         return rules;
     }
+    
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

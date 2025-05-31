@@ -22,7 +22,9 @@ public:
 	int emission; // 0, 1, 2, 3
 	int food; // cheese, meat, veggies
 	bool poisonous;
-	FRule* rules;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<URule*> rules;
 
 	bool getPoisonous() const {
 		return poisonous;
@@ -44,7 +46,11 @@ public:
 		return food;
 	}
 
-
+	UFUNCTION(BlueprintCallable)
+	void setRules(TArray<URule*> newRules)
+	{
+		this->rules = rules;
+	}
 
 protected:
 	// Called when the game starts
