@@ -86,11 +86,10 @@ public:
 	URules();
 
     TArray<URule*> rules;
-    std::string arr[5];
 
     UFUNCTION(BlueprintCallable)
     FString getRulesString() {
-    FString result = "";
+    FString result = "Poison book\n\n";
         
         for (int i = 0; i < 5; i++) {
             result += FString(std::to_string(i+1).c_str());
@@ -104,6 +103,7 @@ public:
     UFUNCTION(BlueprintCallable)
     void NextSetOfRules()
     {
+        rules.Empty();
         std::srand(std::time(nullptr));
         for (int i = 0; i < 5; i++) {
             bool oneOrTwoRules = ((std::rand() % 5) == 1);
