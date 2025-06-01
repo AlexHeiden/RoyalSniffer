@@ -44,7 +44,16 @@ class URule : public UObject{
                         case 2: result += "Red "; break;
                         case 3: result += "Green "; break;
                     }
-                    result += "Color ";
+                    //result += "Color ";
+                    break;
+                case 2:
+                    switch (conditions[i]) {
+                        case 0: result += "Fast Concentrated "; break;
+                        case 1: result += "Fast Spread "; break;
+                        case 2: result += "Slow Concentrated "; break;
+                        case 3: result += "Slow Spread "; break;
+                    }
+                
                     break;
                 case 1:
                     switch (conditions[i]) {
@@ -53,16 +62,7 @@ class URule : public UObject{
                         case 2: result += "Sphere "; break;
                         case 3: result += "Cubes "; break;
                     }
-                    result += "Shape ";
-                    break;
-                case 2:
-                    switch (conditions[i]) {
-                        case 0: result += "Rapid from a single point "; break;
-                        case 1: result += "Rapid from the whole dish "; break;
-                        case 2: result += "Slow from a single point "; break;
-                        case 3: result += "Slow from the whole dish "; break;
-                    }
-                    result += "Emission Style ";
+                    //result += "Shape ";
                     break;
                 case 3:
                     result += "Food Type ";
