@@ -89,6 +89,19 @@ public:
 	}
 
 	UFUNCTION(BlueprintCallable)
+	FString getRulesString() {
+		FString result = "Types of poisonous smells:\n\n";
+        
+		for (int i = 0; i < numberOfRules; i++) {
+			result += FString(std::to_string(i+1).c_str());
+			result += ". ";
+			result += FString(rules[i]->toString().c_str()) + '\n';
+		}
+
+		return result;
+	}
+	
+	UFUNCTION(BlueprintCallable)
 	USmell* getNext() {
         USmell* smell = NewObject<USmell>(this);
 		smell -> Init(-1, -1, -1, -1, false);
