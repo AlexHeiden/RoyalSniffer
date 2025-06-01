@@ -92,7 +92,7 @@ public:
 
     UFUNCTION(BlueprintCallable)
     FString getRulesString() {
-    FString result = "Poison book\n\n";
+    FString result = "Types of poisonous smells:\n\n";
         
         for (int i = 0; i < numberOfRules; i++) {
             result += FString(std::to_string(i+1).c_str());

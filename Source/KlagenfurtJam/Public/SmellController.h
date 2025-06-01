@@ -93,7 +93,7 @@ public:
         USmell* smell = NewObject<USmell>(this);
 		smell -> Init(-1, -1, -1, -1, false);
 
-        int rPoison = std::rand() % 4;
+        int rPoison = std::rand() % 3;
 
         bool poisonous = (rPoison == 1);
 
