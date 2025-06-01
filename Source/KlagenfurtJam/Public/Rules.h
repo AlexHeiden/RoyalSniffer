@@ -85,13 +85,16 @@ public:
 	// Sets default values for this component's properties
 	URules();
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    int numberOfRules = 2;
+    
     TArray<URule*> rules;
 
     UFUNCTION(BlueprintCallable)
     FString getRulesString() {
     FString result = "Poison book\n\n";
         
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < numberOfRules; i++) {
             result += FString(std::to_string(i+1).c_str());
             result += ". ";
             result += FString(rules[i]->toString().c_str()) + '\n';
@@ -105,36 +108,49 @@ public:
     {
         rules.Empty();
         std::srand(std::time(nullptr));
-        for (int i = 0; i < 5; i++) {
-            bool oneOrTwoRules = ((std::rand() % 5) == 1);
-            if (oneOrTwoRules) {
-                int type = std::rand() % 3;
-                int condition = std::rand() % 4;
-
-                int condTypeArr[2] = {type, -1};
-                int conditionArr[2] = {condition, -1};
-
-                URule* newRule = NewObject<URule>(this);
-                newRule -> Init(condTypeArr, conditionArr);
-                rules.Add(newRule);
-            } else {
-                int typeOne = std::rand() % 3;
-                int conditionOne = std::rand() % 4;
-
-                int typeTwo = std::rand() % 3;
-                int conditionTwo = std::rand() % 4;
-
-                while (typeTwo == typeOne) {
-                    typeTwo = std::rand() % 3;
+        int lastRuleType = -1;
+        for (int i = 0; i < numberOfRules; i++) {
+            //bool oneOrTwoRules = ((std::rand() % 5) == 1);
+            //if (oneOrTwoRules)
+            //{
+            int type;
+            while (true)
+            {
+                type = std::rand() % 3;
+                if (type != lastRuleType)
+                {
+                    lastRuleType = type;
+                    break;
                 }
-
-                int condTypeArr[2] = {typeOne, typeTwo};
-                int conditionArr[2] = {conditionOne, conditionTwo};
-
-                URule* newRule = NewObject<URule>(this);
-                newRule -> Init(condTypeArr, conditionArr);
-                rules.Add(newRule);
             }
+            
+            int condition = std::rand() % 4;
+
+            int condTypeArr[2] = {type, -1};
+            int conditionArr[2] = {condition, -1};
+
+            URule* newRule = NewObject<URule>(this);
+            newRule -> Init(condTypeArr, conditionArr);
+            rules.Add(newRule);
+            //}
+            // } else {
+            //     int typeOne = std::rand() % 3;
+            //     int conditionOne = std::rand() % 4;
+            //
+            //     int typeTwo = std::rand() % 3;
+            //     int conditionTwo = std::rand() % 4;
+            //
+            //     while (typeTwo == typeOne) {
+            //         typeTwo = std::rand() % 3;
+            //     }
+            //
+            //     int condTypeArr[2] = {typeOne, typeTwo};
+            //     int conditionArr[2] = {conditionOne, conditionTwo};
+            //
+            //     URule* newRule = NewObject<URule>(this);
+            //     newRule -> Init(condTypeArr, conditionArr);
+            //     rules.Add(newRule);
+            // }
         }
     };
 

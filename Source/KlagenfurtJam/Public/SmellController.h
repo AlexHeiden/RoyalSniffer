@@ -71,14 +71,18 @@ class KLAGENFURTJAM_API USmellController : public UActorComponent
 public:
 	// Sets default values for this component's properties
 	USmellController();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int numberOfRules = 2;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<URule*> rules;
 
 	UFUNCTION(BlueprintCallable)
-	void setRules(TArray<URule*> newRules)
+	void setRules(TArray<URule*> newRules, int newNumberOfRules)
 	{
-		for (int i = 0; i < 5; i++)
+		numberOfRules = newNumberOfRules;
+		for (int i = 0; i < numberOfRules; i++)
 		{
 			rules.Add(newRules[i]);
 		}
@@ -96,9 +100,9 @@ public:
         smell->poisonous = poisonous;
 
         if (poisonous) {
-            int ruleToComplyNum = std::rand() % 5;
+            int ruleToComplyNum = std::rand() % numberOfRules;
             URule* ruleToComply = rules[ruleToComplyNum];
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < numberOfRules; i++) {
                 switch (ruleToComply->condTypes[i])
                 {
                     case 0:
@@ -132,7 +136,7 @@ public:
                 smell->emission = std::rand() % 4;
 
                 ok = true;
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < numberOfRules; i++) {
                     for (int j = 0; j < 2; j++) {
                         if (rules[i]->condTypes[j] == 0 && rules[i]->conditions[j] == smell->color) {
                             ok = false;
